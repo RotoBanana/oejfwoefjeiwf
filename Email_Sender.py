@@ -5,12 +5,13 @@ from datetime import date, datetime
 import random
 import time
 import pytz
+import requests
 
 times_sent = 1
 
 #OPTIMIZE: if the hour is not between 7:00-18:00, dont let it check every minute again and again. just let it sleep.
 
-def email_sender_to_military(times_sent, now_time): #Putting it in a function for comfort
+def email_sender(times_sent, now_time): #Putting it in a function for comfort
 
 
     #EVERYTHING ORGANIZED. -unnecessary
@@ -18,10 +19,10 @@ def email_sender_to_military(times_sent, now_time): #Putting it in a function fo
     email_password = "jnizoewdswotfmok"
     email_reciever = "ramavni1@gmail.com" #To Email
 
-    subject = 'וואו זה אשכרה עובד' + now_time # Title
+    subject = "כל הכבוד! -" + now_time # Title
 
     body = """
-    מה שכתוב אשכרה במייל
+    בדיקה אחרונה לפני השמה!
     נשלח %d פעמים
 
     """ % times_sent
@@ -42,6 +43,17 @@ def email_sender_to_military(times_sent, now_time): #Putting it in a function fo
         smtp.login(email_sender, email_password) #Connect to Gmail
         smtp.sendmail(email_sender, email_reciever, em.as_string()) #The actual sender
 
+def send_to_telegram(message):
+
+    apiToken = '5749285015:AAEQKchvCQgecEyhgIgs_mmMd_UoJ9Xo58A'
+    chatID = '441511440'
+    apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
+
+    try:
+        response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
+        print(response.text)
+    except Exception as e:
+        print(e)
 
 def current_time():
     #Current Time - Israel
@@ -100,20 +112,32 @@ def random_times():
     #Print random times
     print("""3 Messages had been sent today! Initializing new times:
 
+
 Random times are:
-1st: %s
-2nd %s
-3rd %s"""
+%s
+%s
+%s"""
+    % (ran_time_0, ran_time_1, ran_time_2))
+
+    send_to_telegram("""הגרלה חדשה!
+השעות הרנדומליות הן:
+%s
+%s
+%s"""
     % (ran_time_0, ran_time_1, ran_time_2))
 
     return ran_time_0, ran_minute_1, ran_minute_2
 
 
-
-
-
 #Sender, and Counter
-while True:
+
+message_telegeram = """נשלחה הודעה מס' %s בשעה: %s בהצלחה!
+זו ההודעה ה%s היום!
+"הזמנים הרנדומליי הם:\n%s\n%s\n%s"""
+
+message_console = "Message No. %s Has been sent at %s, Successfully!"
+
+while True: #Does this once per day
     checker = 0
     ran_time_0, ran_time_1, ran_time_2 = random_times()
 
@@ -122,11 +146,12 @@ while True:
         
         if ((now_time == ran_time_0) or
             (now_time == ran_time_1) or
-            (now_time == ran_time_2) or
-            (now_time == now_time)):
+            (now_time == ran_time_2)):
 
-            email_sender_to_military(times_sent, now_time)
-            print("A new Message has been sent! %s" % now_time)
+            email_sender(times_sent, now_time)
+            send_to_telegram(message_telegeram % (times_sent, now_time, checker + 1, ran_time_0, ran_time_1, ran_time_2))
+            print(message_console % (times_sent, now_time, checker + 1))
+            
             checker += 1
             times_sent += 1
             time.sleep(60)
