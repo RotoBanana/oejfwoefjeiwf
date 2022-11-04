@@ -42,12 +42,12 @@ def email_sender_to_military(times_sent, now_time): #Putting it in a function fo
         smtp.login(email_sender, email_password) #Connect to Gmail
         smtp.sendmail(email_sender, email_reciever, em.as_string()) #The actual sender
 
-#Randomizes a time between 8:00 - 18:00, In which it sends the message
 
-
-#Current Time - Israel
 def current_time():
+    #Current Time - Israel
     israel_time = pytz.timezone('Israel')
+
+    #Making now Class (is it called 'class'?)
     now = datetime.now(israel_time)
     now_hour = now.strftime("%H")
     now_minute = now.strftime("%M")
@@ -55,6 +55,7 @@ def current_time():
 
     return now_time
 
+    #Randomizes a time between 8:00 - 18:00, In which it sends the message
 def random_times():
     #First hour Randomizer
     ran_hour_0 = random.randint(7,18)
@@ -97,12 +98,12 @@ def random_times():
     ran_time_2 = str(ran_hour_2) + ':' + str(ran_minute_2)
 
     #Print random times
-    print("""3 Messages have been send today! Initializing new times:
+    print("""3 Messages had been sent today! Initializing new times:
 
-    Random times are:
-    1st: %s
-    2nd %s
-    3rd %s"""
+Random times are:
+1st: %s
+2nd %s
+3rd %s"""
     % (ran_time_0, ran_time_1, ran_time_2))
 
     return ran_time_0, ran_minute_1, ran_minute_2
@@ -111,14 +112,12 @@ def random_times():
 
 
 
-#timer
-
-
+#Sender, and Counter
 while True:
     checker = 0
     ran_time_0, ran_time_1, ran_time_2 = random_times()
 
-    while checker != 3:
+    while checker != 3 or checker < 3: #Amount of times, sent. Also is affected by the following if statement. --> Change to Increase/Decrease the amount of messages per day.
         now_time = current_time()
         
         if ((now_time == ran_time_0) or
@@ -135,4 +134,4 @@ while True:
         else:
             time.sleep(60)
     
-    #TO DO: EXIT SECOND LOOP HERE, AND MAKE IT SLEEP UNTIL THE NEXT DAY, THEN THE LOOP WILL GO AGAIN.
+    #TO DO: EXIT SECOND LOOP HERE, AND MAKE IT SLEEP UNTIL THE NEXT DAY, THEN THE LOOP WILL GO AGAIN. --> To maximize efficiency 
