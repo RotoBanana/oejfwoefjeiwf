@@ -97,7 +97,9 @@ def random_times():
     ran_time_2 = str(ran_hour_2) + ':' + str(ran_minute_2)
 
     #Print random times
-    print("""Random times are:
+    print("""3 Messages have been send today! Initializing new times:
+
+    Random times are:
     1st: %s
     2nd %s
     3rd %s"""
@@ -125,6 +127,7 @@ while True:
             (now_time == now_time)):
 
             email_sender_to_military(times_sent, now_time)
+            print("A new Message Has been sent!")
             checker += 1
             times_sent += 1
             time.sleep(60)
