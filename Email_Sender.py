@@ -4,10 +4,11 @@ import smtplib
 from datetime import date, datetime
 import random
 import time
+import pytz
 
 times_sent = 1
 
-#BUG: RANDON MINUTE CAN BE EQUAL TO "2" WHILE NOW_MINUTE WILL ALWAYS BE EQUAL TO "02" --> add a x<10 number checker, which adds a 0.
+#BUG: Change Local time date to Israel, for the VPS.
 #OPTIMIZE: if the hour is not between 7:00-18:00, dont let it check every minute again and again. just let it sleep.
 
 def email_sender_to_military(times_sent, now_time): #Putting it in a function for comfort
@@ -45,9 +46,10 @@ def email_sender_to_military(times_sent, now_time): #Putting it in a function fo
 #Randomizes a time between 8:00 - 18:00, In which it sends the message
 
 
-#Current Time
+#Current Time - Israel
 def current_time():
-    now = datetime.now()
+    israel_time = pytz.timezone('Israel')
+    now = datetime.now(israel_time)
     now_hour = now.strftime("%H")
     now_minute = now.strftime("%M")
     now_time = now_hour + ':' + now_minute
@@ -127,6 +129,3 @@ while True:
     
     else:
         time.sleep(60)
-
-
-        
