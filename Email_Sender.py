@@ -118,7 +118,7 @@ while True:
     checker = 0
     ran_time_0, ran_time_1, ran_time_2 = random_times()
 
-    while checker >= 3:
+    while checker != 3:
         now_time = current_time()
         
         if ((now_time == ran_time_0) or
@@ -127,7 +127,7 @@ while True:
             (now_time == now_time)):
 
             email_sender_to_military(times_sent, now_time)
-            print("A new Message Has been sent!")
+            print("A new Message has been sent! %s" % now_time)
             checker += 1
             times_sent += 1
             time.sleep(60)
