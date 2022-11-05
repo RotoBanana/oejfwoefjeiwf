@@ -17,7 +17,7 @@ def email_sender(times_sent, now_time): #Putting it in a function for comfort
     #EVERYTHING ORGANIZED. -unnecessary
     email_sender = "ramavni1@gmail.com" #From Email
     email_password = "jnizoewdswotfmok"
-    email_reciever = "ramavni1@gmail.com" #To Email
+    email_reciever = "rotobanana1@gmail.com" #To Email
 
     subject = "כל הכבוד! -" + now_time # Title
 
@@ -101,8 +101,10 @@ def random_times():
         if ran_hour_2 == 18: ran_minute_2 = 0
         if int(ran_minute_2) < 10: ran_minute_2 = '0' + str(ran_minute_2)
 
-        if ((ran_hour_2 >= ran_hour_0 + 3 and ran_hour_2 >= ran_hour_0 + 3)
-        or (ran_hour_2 <= ran_hour_0 - 3 and ran_hour_2 <= ran_hour_0 - 3)):
+        if ((ran_hour_2 >= ran_hour_0 + 3 and ran_hour_2 >= ran_hour_1 + 3)
+        or (ran_hour_2 <= ran_hour_0 - 3 and ran_hour_2 <= ran_hour_1 - 3
+        or (ran_hour_2 >= ran_hour_0 + 3 and ran_hour_2 <= ran_hour_1 - 3
+        or ran_hour_2 >= ran_hour_1 + 3 and ran_hour_2 <= ran_hour_0 - 3))):
             break
         else:
             continue
@@ -135,13 +137,13 @@ message_telegeram = """נשלחה הודעה מס' %s בשעה: %s בהצלחה!
 זו ההודעה ה%s היום!
 "הזמנים הרנדומליי הם:\n%s\n%s\n%s"""
 
-message_console = "Message No. %s Has been sent at %s, Successfully!"
+message_console = "Message No. %s Has been sent at %s, Successfully!\n This is the %s message for today."
 
 while True: #Does this once per day
     checker = 0
     ran_time_0, ran_time_1, ran_time_2 = random_times()
 
-    while not checker > 2: #Amount of times, sent. Also is affected by the following if statement. --> Change to Increase/Decrease the amount of messages per day.
+    while checker <= 2: #Amount of times (minus one), sent. Also is affected by the following if statement. --> Change to Increase/Decrease the amount of messages per day.
         now_time = current_time()
         
         if ((now_time == ran_time_0) or
