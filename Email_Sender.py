@@ -17,7 +17,7 @@ def email_sender(times_sent, now_time): #Putting it in a function for comfort
     #EVERYTHING ORGANIZED. -unnecessary
     email_sender = "ramavni1@gmail.com" #From Email
     email_password = "jnizoewdswotfmok"
-    email_reciever = "rotobanana1@gmail.com" #To Email
+    email_reciever = "ramavni1@gmail.com" #To Email
 
     subject = "כל הכבוד! -" + now_time # Title
 
