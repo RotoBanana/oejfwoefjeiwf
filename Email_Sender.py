@@ -135,7 +135,7 @@ Random times are:
 
 message_telegeram = """נשלחה הודעה מס' %s בשעה: %s בהצלחה!
 זו ההודעה ה%s היום!
-"הזמנים הרנדומליי הם:\n%s\n%s\n%s"""
+"הזמנים הרנדומליים הם:\n%s\n%s\n%s"""
 
 message_console = "Message No. %s Has been sent at %s, Successfully!\n This is the %s message for today."
 
