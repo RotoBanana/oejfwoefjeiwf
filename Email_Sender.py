@@ -143,7 +143,7 @@ while True: #Does this once per day
     checker = 0
     ran_time_0, ran_time_1, ran_time_2 = random_times()
 
-    while checker <= 2: #Amount of times (minus one), sent. Also is affected by the following if statement. --> Change to Increase/Decrease the amount of messages per day.
+    while not checker > 2: #Amount of times (minus one), sent. Also is affected by the following if statement. --> Change to Increase/Decrease the amount of messages per day.
         now_time = current_time()
         
         if ((now_time == ran_time_0) or
