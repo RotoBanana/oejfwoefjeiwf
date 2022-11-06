@@ -63,7 +63,7 @@ def current_time():
     now = datetime.now(israel_time)
     now_hour = now.strftime("%H")
     now_minute = now.strftime("%M")
-    now_time = now_hour + ':' + now_minute
+    now_time = str(now_hour) + ':' + str(now_minute)
 
     return now_time
 
@@ -148,7 +148,8 @@ while True: #Does this once per day
         
         if ((now_time == ran_time_0) or
             (now_time == ran_time_1) or
-            (now_time == ran_time_2)):
+            (now_time == ran_time_2) or
+            (now_time == now_time)):
 
             email_sender(times_sent, now_time)
             send_to_telegram(message_telegeram % (times_sent, now_time, checker + 1, ran_time_0, ran_time_1, ran_time_2))
