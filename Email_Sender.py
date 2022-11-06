@@ -145,11 +145,10 @@ while True: #Does this once per day
 
     while not checker > 2: #Amount of times (minus one), sent. Also is affected by the following if statement. --> Change to Increase/Decrease the amount of messages per day.
         now_time = current_time()
-        
+        ran_time_0 = '13:33'
         if ((now_time == ran_time_0) or
             (now_time == ran_time_1) or
-            (now_time == ran_time_2) or
-            (now_time == now_time)):
+            (now_time == ran_time_2)):
 
             email_sender(times_sent, now_time)
             send_to_telegram(message_telegeram % (times_sent, now_time, checker + 1, ran_time_0, ran_time_1, ran_time_2))
